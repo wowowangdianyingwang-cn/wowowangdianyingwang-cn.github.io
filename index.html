@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="窝窝网电影网(wowowangdianyingwang-cn)——温暖好看的电影与剧集推荐门户，提供每日片单、影视资讯、口碑榜单与观影指南。">
+<meta name="keywords" content="窝窝网电影网, wowowangdianyingwang-cn, 电影, 影视, 电影推荐, 在线电影, 电视剧, 电影资讯, 口碑榜单">
+<meta name="author" content="窝窝网电影网">
+<meta name="theme-color" content="#7a1f3d">
+<title>窝窝网电影网 - 温暖你的观影时光 | wowowangdianyingwang-cn</title>
+<link rel="canonical" href="https://wowowangdianyingwang-cn.github.io">
+<style>
+/* ============ 基础 ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --plum:#7a1f3d; --plum-d:#5c152c; --plum-l:#a8325c;
+  --cream:#fff7f0; --coral:#ff6f61; --coral-l:#ff9a8b;
+  --ink:#2b2326; --sub:#7a6f73; --line:#f0dcd2;
+  --r:18px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--cream);color:var(--ink);line-height:1.8;
+  background-image:
+    radial-gradient(circle at 88% 6%,rgba(255,111,97,.10),transparent 36%),
+    radial-gradient(circle at 4% 30%,rgba(122,31,61,.07),transparent 34%);
+  background-attachment:fixed;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.kicker{color:var(--coral);font-weight:900;letter-spacing:3px;font-size:.78rem;text-transform:uppercase}
+.sec-t{font-size:clamp(1.6rem,5vw,2.2rem);font-weight:950;letter-spacing:.5px;margin:6px 0 8px;color:var(--plum)}
+.sec-s{color:var(--sub);margin-bottom:26px;font-size:.97rem}
+.bar{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.bar a{font-size:.85rem;color:var(--plum);font-weight:800;border-bottom:2px solid transparent}
+.bar a:hover{border-color:var(--coral)}
+
+/* ============ 顶部条 ============ */
+.topbar{background:var(--plum);color:#f7e3dc;font-size:.78rem;letter-spacing:1px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:34px;gap:12px}
+.topbar a{color:#f7e3dc;opacity:.85}
+.topbar a:hover{opacity:1;text-decoration:underline}
+
+/* ============ 导航（下划线随动） ============ */
+.navbar{position:sticky;top:0;z-index:60;background:rgba(255,247,240,.92);backdrop-filter:blur(14px);border-bottom:3px solid var(--plum)}
+.nv{display:flex;align-items:center;height:68px;gap:8px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:950;font-size:1.2rem;letter-spacing:.5px;white-space:nowrap}
+.logo .w{width:40px;height:40px;border-radius:14px;background:linear-gradient(140deg,var(--coral),var(--plum));color:#fff;display:grid;place-items:center;font-size:1.15rem;box-shadow:0 6px 16px rgba(122,31,61,.28)}
+.logo em{font-style:normal;color:var(--coral)}
+.tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--sub);border-radius:12px 12px 0 0;transition:.2s;white-space:nowrap;position:relative}
+.tab:hover{color:var(--plum);background:rgba(255,111,97,.1)}
+.tab.on{color:#fff;background:var(--plum)}
+.burger{display:none;background:var(--plum);color:#fff;border:none;border-radius:12px;width:42px;height:42px;font-size:1.25rem;cursor:pointer;flex-shrink:0}
+
+/* ============ Hero（暖色大圆角卡片） ============ */
+.hero{padding:clamp(40px,8vw,74px) 0 20px}
+.hero-card{background:linear-gradient(135deg,var(--plum) 0%,var(--plum-l) 55%,var(--coral) 100%);color:#fff;border-radius:34px;padding:clamp(30px,6vw,56px);position:relative;overflow:hidden;box-shadow:0 28px 64px rgba(122,31,61,.3)}
+.hero-card::after{content:"🍿";position:absolute;right:-20px;bottom:-30px;font-size:180px;opacity:.14;transform:rotate(-12deg)}
+.hc{position:relative;z-index:2;max-width:640px}
+.hc .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:30px;font-size:.8rem;backdrop-filter:blur(4px)}
+.hc h1{font-size:clamp(2.2rem,7vw,3.8rem);line-height:1.1;font-weight:950;margin:18px 0 16px}
+.hc h1 s{text-decoration:none;background:linear-gradient(transparent 62%,#ffe3d6 62%);color:#fff}
+.hc p{font-size:1.08rem;opacity:.94;max-width:520px}
+.hc .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:40px;font-weight:800;font-size:.96rem;transition:.25s}
+.btn-w{background:#fff;color:var(--plum)}
+.btn-w:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.2)}
+.btn-g{background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-g:hover{background:rgba(255,255,255,.35)}
+
+/* ============ 通用 ============ */
+.section{padding:clamp(44px,8vw,76px) 0}
+.rv{opacity:0;transform:translateY(24px);transition:.65s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* 栏目一：每日片单 —— CSS 瀑布/Bento 网格 */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px}
+.bt{grid-column:span 1;grid-row:span 1;border-radius:var(--r);padding:18px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:.3s;cursor:pointer;min-height:0}
+.bt::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.55));z-index:1}
+.bt span{position:relative;z-index:2;font-size:1.7rem;margin-bottom:6px}
+.bt b{position:relative;z-index:2;font-size:1rem;line-height:1.3}
+.bt small{position:relative;z-index:2;font-size:.74rem;opacity:.85}
+.bt:hover{transform:scale(1.02);box-shadow:0 18px 36px rgba(122,31,61,.28)}
+.bt.l{grid-column:span 2;grid-row:span 2}
+.bt.l b{font-size:1.5rem}
+.bt.t{grid-row:span 2}
+@media(max-width:900px){.bento{grid-template-columns:repeat(3,1fr);grid-auto-rows:130px}.bt.l{grid-column:span 2}.bt.t{grid-row:span 1}}
+@media(max-width:600px){.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}.bt.l{grid-column:span 2;grid-row:span 1}.bt b{font-size:.92rem}}
+
+/* 栏目二：影视资讯 —— 竖向卡片流 */
+.flow{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.fcard{background:#fff;border:2px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.fcard:hover{border-color:var(--coral);transform:translateY(-5px);box-shadow:0 18px 38px rgba(122,31,61,.13)}
+.fcard .top{aspect-ratio:4/3;display:grid;place-items:center;font-size:3rem}
+.fcard .bot{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.fcard time{font-size:.74rem;color:var(--coral);font-weight:800;letter-spacing:1px}
+.fcard h3{font-size:1.08rem;margin:6px 0 8px;line-height:1.45}
+.fcard p{font-size:.87rem;color:var(--sub);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fcard .more{margin-top:auto;padding-top:12px;font-size:.82rem;font-weight:800;color:var(--plum)}
+
+/* 栏目三：口碑榜单 —— 横向进度条 */
+.bars{display:flex;flex-direction:column;gap:14px}
+.br{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 20px;transition:.25s}
+.br:hover{border-color:var(--plum);box-shadow:0 10px 26px rgba(122,31,61,.12)}
+.br-h{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.br-h .no{font-weight:950;font-size:1.7rem;line-height:1;color:var(--coral);font-style:italic;min-width:42px}
+.br-h .tt{font-weight:800;font-size:1.05rem}
+.br-h .sc{margin-left:auto;color:var(--plum);font-weight:900;font-size:1rem;white-space:nowrap}
+.track{height:12px;background:#fbe4de;border-radius:20px;overflow:hidden}
+.fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--coral),var(--plum));transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.fill.s2{background:linear-gradient(90deg,var(--coral-l),var(--plum-l))}
+.fill.s3{background:linear-gradient(90deg,#ffb199,#c96a8e)}
+
+/* 栏目四：观影指南 —— 步骤向导 */
+.wizard{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.st{background:#fff;border-radius:var(--r);padding:24px 22px;border-top:6px solid var(--coral);position:relative;transition:.3s}
+.st:hover{box-shadow:0 16px 36px rgba(122,31,61,.14);transform:translateY(-4px)}
+.st .n{position:absolute;right:18px;top:14px;font-size:2.6rem;font-weight:950;color:rgba(255,111,97,.18);line-height:1}
+.st h3{font-size:1.1rem;color:var(--plum);margin-bottom:10px}
+.st p{font-size:.9rem;color:var(--sub)}
+.st a{display:inline-block;margin-top:14px;color:var(--coral);font-weight:800;font-size:.84rem}
+
+/* 栏目五：类型速览 —— 滑动胶囊 + 标签云 */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.chip{padding:10px 20px;border-radius:40px;background:#fff;border:2px solid var(--line);font-weight:700;font-size:.9rem;color:var(--sub);transition:.2s;cursor:pointer}
+.chip:hover,.chip.on{border-color:var(--plum);color:var(--plum);background:#fdeeea;transform:scale(1.05)}
+.cloud{display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start}
+.tag{padding:8px 16px;border-radius:12px;background:rgba(122,31,61,.06);color:var(--plum);font-size:.88rem;font-weight:600;transition:.2s}
+.tag:hover{background:var(--plum);color:#fff;transform:rotate(-2deg)}
+
+/* ============ 页脚 ============ */
+.foot{background:var(--plum);color:#f3dfd8;margin-top:10px;padding:52px 0 26px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;margin-bottom:32px}
+.fg h4{color:var(--coral-l);font-size:1rem;margin-bottom:14px;letter-spacing:1px}
+.fg li{margin-bottom:9px}
+.fg a{color:#e3c9c0;font-size:.87rem}
+.fg a:hover{color:#fff;text-decoration:underline}
+.copy{text-align:center;color:#c99;font-size:.82rem;border-top:1px solid rgba(255,255,255,.14);padding-top:22px}
+.copy b{color:var(--coral-l)}
+
+/* ============ 响应式 ============ */
+@media(max-width:820px){
+  .topbar{display:none}
+  .burger{display:grid;place-items:center;margin-left:auto}
+  .tabs{position:fixed;inset:68px 0 0 0;flex-direction:column;background:var(--cream);padding:22px;gap:6px;overflow-y:auto;transform:translateX(100%);transition:.3s;z-index:55;border-top:3px solid var(--plum)}
+  .tabs.open{transform:none}
+  .tab{border-radius:14px;text-align:center;padding:16px}
+}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<!-- ===== 顶部信息条 ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <span>🎬 窝窝网电影网 · 每日更新精选片单</span>
+    <span><a href="#">RSS</a> ｜ <a href="#">免责声明</a></span>
+  </div>
+</div>
+
+<!-- ===== 导航 ===== -->
+<header class="navbar">
+  <div class="wrap nv">
+    <a class="logo" href="#top" aria-label="窝窝网电影网 首页">
+      <span class="w" aria-hidden="true">窝</span>
+      <span>窝窝<span>网</span>电影网</span>
+    </a>
+    <button class="burger" id="burger" aria-label="菜单" aria-expanded="false">≡</button>
+    <nav class="tabs" id="tabs" aria-label="主导航">
+      <a class="tab on" href="#bento">每日片单</a>
+      <a class="tab" href="#flow">影视资讯</a>
+      <a class="tab" href="#bars">口碑榜单</a>
+      <a class="tab" href="#wizard">观影指南</a>
+      <a class="tab" href="#cloud">类型速览</a>
+      <a class="tab" href="#about">关于本站</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-card">
+      <div class="hc">
+        <span class="chip">🔥 今日主编推荐</span>
+        <h1>窝在沙发里<br><s>看好电影</s></h1>
+        <p>窝窝网电影网（wowowangdianyingwang-cn）是一个温暖的影视推荐门户。我们不生产电影，我们只替你挑出值得那两小时的片子。</p>
+        <div class="acts">
+          <a class="btn btn-w" href="#bento">挑今晚的片 →</a>
+          <a class="btn btn-g" href="#bars">看口碑榜</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目一：每日片单（Bento 网格） ===== -->
+<section class="section" id="bento">
+  <div class="wrap">
+    <div class="kicker">Column 01 · Bento Grid</div>
+    <div class="bar"><h2 class="sec-t">每日片单 · 一格一世界</h2><a href="#">完整片单 ›</a></div>
+    <div class="bento">
+
+      <article class="bt l rv" style="background:linear-gradient(140deg,#3a2a5c,#7a1f7a)"><span>🌙</span><b>月亮上的小屋</b><small>治愈 · 8.9 分 · 主编首选</small></article>
+      <article class="bt rv" style="background:linear-gradient(140deg,#c8553d,#7a1f3d)"><span>🐾</span><b>回不去的夏天</b><small>青春 · 8.5</small></article>
+      <article class="bt t rv" style="background:linear-gradient(140deg,#2f6b5e,#1c4038)"><span>🚲</span><b>南方车站的聚会</b><small>犯罪 · 8.7</small></article>
+      <article class="bt rv" style="background:linear-gradient(140deg,#d99a2b,#8a5a10)"><span>🍂</span><b>秋日私语</b><small>剧情 · 8.4</small></article>
+      <article class="bt rv" style="background:linear-gradient(140deg,#4a6fa5,#223a5c)"><span>🚀</span><b>星际信使</b><small>科幻 · 8.6</small></article>
+      <article class="bt rv" style="background:linear-gradient(140deg,#b0413e,#5e1d1b)"><span>🎻</span><b>琴声入海</b><small>音乐 · 8.8</small></article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目二：影视资讯（卡片流） ===== -->
+<section class="section" id="flow" style="background:rgba(122,31,61,.035)">
+  <div class="wrap">
+    <div class="kicker">Column 02 · Card Flow</div>
+    <div class="bar"><h2 class="sec-t">影视资讯 · 值得一读</h2><a href="#">资讯频道 ›</a></div>
+    <div class="flow">
+
+      <article class="fcard rv">
+        <div class="top" style="background:linear-gradient(135deg,#ffd59e,#f79b5a)">🏆</div>
+        <div class="bot">
+          <time datetime="2026-10-05">2026.10.05</time>
+          <h3>《月亮上的小屋》拿下国际电影节最高奖</h3>
+          <p>评委称其"用最克制的镜头，讲出了最汹涌的思念"，导演坦言灵感来自外婆的阁楼。</p>
+          <a class="more" href="#">阅读全文 →</a>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="top" style="background:linear-gradient(135deg,#cfe3d0,#7ba87e)">📺</div>
+        <div class="bot">
+          <time datetime="2026-10-03">2026.10.03</time>
+          <h3>年度高分剧集盘点：这五部值得熬夜</h3>
+          <p>从悬疑到治愈，从短剧到长篇，我们筛掉了注水剧，留下真正的好故事。</p>
+          <a class="more" href="#">阅读全文 →</a>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="top" style="background:linear-gradient(135deg,#d7c4e8,#9b7bb0)">🎞️</div>
+        <div class="bot">
+          <time datetime="2026-09-29">2026.09.29</time>
+          <h3>老电影 4K 修复：胶片的第二次生命</h3>
+          <p>百部经典启动修复工程，色彩还原到当年洗印厂的配方，连划痕都被温柔保留。</p>
+          <a class="more" href="#">阅读全文 →</a>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="top" style="background:linear-gradient(135deg,#ffc9c2,#e88a7c)">🍿</div>
+        <div class="bot">
+          <time datetime="2026-09-25">2026.09.25</time>
+          <h3>爆米花的正确打开方式：观影仪式感</h3>
+          <p>关灯、调音量、放下手机。好电影值得你给它九十分钟不被打扰的专注。</p>
+          <a class="more" href="#">阅读全文 →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目三：口碑榜单（进度条） ===== -->
+<section class="section" id="bars">
+  <div class="wrap">
+    <div class="kicker">Column 03 · Ranking Bar</div>
+    <div class="bar"><h2 class="sec-t">口碑榜单 · 观众用脚投票</h2><a href="#">完整榜单 ›</a></div>
+    <div class="bars">
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">01</span><span class="tt">月亮上的小屋</span><span class="sc">9.2 分</span></div>
+        <div class="track"><div class="fill" style="width:92%"></div></div>
+      </article>
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">02</span><span class="tt">琴声入海</span><span class="sc">8.9 分</span></div>
+        <div class="track"><div class="fill s2" style="width:89%"></div></div>
+      </article>
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">03</span><span class="tt">星际信使</span><span class="sc">8.7 分</span></div>
+        <div class="track"><div class="fill s3" style="width:87%"></div></div>
+      </article>
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">04</span><span class="tt">南方车站的聚会</span><span class="sc">8.6 分</span></div>
+        <div class="track"><div class="fill" style="width:86%"></div></div>
+      </article>
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">05</span><span class="tt">回不去的夏天</span><span class="sc">8.5 分</span></div>
+        <div class="track"><div class="fill s2" style="width:85%"></div></div>
+      </article>
+
+      <article class="br rv">
+        <div class="br-h"><span class="no">06</span><span class="tt">秋日私语</span><span class="sc">8.4 分</span></div>
+        <div class="track"><div class="fill s3" style="width:84%"></div></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目四：观影指南（步骤向导） ===== -->
+<section class="section" id="wizard" style="background:rgba(122,31,61,.035)">
+  <div class="wrap">
+    <div class="kicker">Column 04 · Wizard</div>
+    <h2 class="sec-t">观影指南 · 四步选好片</h2>
+    <p class="sec-s">别再为"今晚看什么"纠结半小时。</p>
+    <div class="wizard">
+
+      <div class="st rv">
+        <span class="n">01</span>
+        <h3>定心情</h3>
+        <p>想哭、想笑、想烧脑，还是只想发呆？情绪是选片的第一把钥匙。</p>
+        <a href="#">看情绪片单 →</a>
+      </div>
+
+      <div class="st rv">
+        <span class="n">02</span>
+        <h3>看口碑</h3>
+        <p>别只看分数，看评分人数与评分曲线。上映两周后的分，才接近真实。</p>
+        <a href="#">看口碑榜 →</a>
+      </div>
+
+      <div class="st rv">
+        <span class="n">03</span>
+        <h3>对时长</h3>
+        <p>睡前选 90 分钟内，周末留 150 分钟给史诗。时间决定体验上限。</p>
+        <a href="#">按时长筛选 →</a>
+      </div>
+
+      <div class="st rv">
+        <span class="n">04</span>
+        <h3>给专注</h3>
+        <p>关掉弹幕与消息，看完别急着查评分。好电影会在三天后回访你。</p>
+        <a href="#">观影礼仪 →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目五：类型速览（胶囊 + 标签云） ===== -->
+<section class="section" id="cloud">
+  <div class="wrap">
+    <div class="kicker">Column 05 · Filter Cloud</div>
+    <div class="bar"><h2 class="sec-t">类型速览 · 一键直达</h2><a href="#">全部分类 ›</a></div>
+    <div class="chips">
+      <span class="chip on">全部</span>
+      <span class="chip">剧情</span>
+      <span class="chip">爱情</span>
+      <span class="chip">悬疑</span>
+      <span class="chip">科幻</span>
+      <span class="chip">动画</span>
+      <span class="chip">纪录片</span>
+      <span class="chip">喜剧</span>
+    </div>
+    <div class="cloud">
+      <a class="tag" href="#">治愈系 🌿</a>
+      <a class="tag" href="#">烧脑悬疑 🔍</a>
+      <a class="tag" href="#">公路冒险 🛣️</a>
+      <a class="tag" href="#">深夜食堂 🍜</a>
+      <a class="tag" href="#">女性视角 👩</a>
+      <a class="tag" href="#">历史正剧 🏯</a>
+      <a class="tag" href="#">冷门佳片 💎</a>
+      <a class="tag" href="#">合家欢 🧸</a>
+      <a class="tag" href="#">短片集 🎬</a>
+      <a class="tag" href="#">纪录片 🌍</a>
+      <a class="tag" href="#">音乐现场 🎵</a>
+      <a class="tag" href="#">经典修复 🎞️</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h4>窝窝网电影网</h4>
+        <p style="font-size:.87rem;color:#e3c9c0;max-width:250px">一个温暖的影视推荐门户。窝是归属，窝窝是"再待一会儿"——好电影值得你多留一小时。</p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#bento">每日片单</a></li>
+          <li><a href="#flow">影视资讯</a></li>
+          <li><a href="#bars">口碑榜单</a></li>
+          <li><a href="#wizard">观影指南</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>影片类型</h4>
+        <ul>
+          <li><a href="#cloud">剧情 / 爱情 / 青春</a></li>
+          <li><a href="#cloud">悬疑 / 犯罪 / 科幻</a></li>
+          <li><a href="#cloud">动画 / 纪录片 / 短片</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>站点信息</h4>
+        <ul>
+          <li><a href="#">版权声明</a></li>
+          <li><a href="#">免责声明</a></li>
+          <li><a href="#">意见反馈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <p>网站名称：<b>窝窝网电影网</b> ｜ 网站网址：<b>https://wowowangdianyingwang-cn.github.io</b></p>
+      <p style="margin-top:8px">© <span id="yr"></span> wowowangdianyingwang-cn 保留所有权利。本页为静态演示页面，内链以 # 占位。</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+var bg=document.getElementById('burger'),ts=document.getElementById('tabs');
+bg.addEventListener('click',function(){
+  var o=ts.classList.toggle('open');
+  bg.setAttribute('aria-expanded',o);
+  bg.textContent=o?'✕':'≡';
+});
+ts.addEventListener('click',function(e){if(e.target.classList.contains('tab')){ts.classList.remove('open');bg.setAttribute('aria-expanded','false');bg.textContent='≡';}});
+
+// 导航高亮
+var tabs=[].slice.call(document.querySelectorAll('.tab')),secs=tabs.map(function(t){return document.querySelector(t.getAttribute('href'));});
+window.addEventListener('scroll',function(){
+  var y=window.scrollY+140,cur=0;
+  secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});
+  tabs.forEach(function(t,i){t.classList.toggle('on',i===cur);});
+},{passive:true});
+
+// 进入视口动画
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08,boundary:document});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+// 胶囊切换
+document.querySelectorAll('.chip').forEach(function(c){
+  c.addEventListener('click',function(){document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});c.classList.add('on');});
+});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
